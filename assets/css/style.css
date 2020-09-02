@@ -5,3 +5,16 @@
 #search-btn {
     min-width: 38px;
 }
+
+#city-list {
+    margin-left: 15px;
+    min-width: 80%;
+}
+
+#city-card {
+    height: 500px;
+}
+
+#city-five-day {
+    height: 200px;
+}

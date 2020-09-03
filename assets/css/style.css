@@ -12,9 +12,39 @@
 }
 
 #city-card {
-    height: 500px;
+    /* height: 500px; */
 }
 
 #city-five-day {
     height: 200px;
+}
+
+#city-details {
+    height: 100%;
+}
+
+.city-detail {
+    font-size: 20px;
+}
+
+.badge-success {
+    background-color: #299501;
+}
+
+.badge-warning {
+    background-color: #F7E401;
+}
+
+.badge-caution {
+    color: #212529;
+    background-color: #F95901;
+}
+
+.badge-danger {
+    background-color: #D90011;
+}
+
+.badge-doomed {
+    color: #fff;
+    background-color: #6C49CB;
 }

@@ -1,6 +1,6 @@
 var apiKey = "eb45e13bc37e0b171df80c35b694b693";
-var searchedCitys = JSON.parse(localStorage.getItem("Cities")) || [];
-var formEl = document.querySelector("form-group");
+var searchedCities = JSON.parse(localStorage.getItem("cities")) || [];
+var formEl = document.querySelector(".form-group");
 var cityCardEl = document.querySelector("#city-card");
 
 var getTodaysWeather = function (cityName) {
@@ -9,7 +9,24 @@ var getTodaysWeather = function (cityName) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
+                searchedCities.push(cityName);
+                localStorage.setItem("cities", JSON.stringify(searchedCities));
+
                 displayTodaysWeather(data, cityName);
+            }).then(getForecast(cityName));
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    });
+}
+
+var getForecast = function (cityName) {
+    var apiForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+
+    fetch(apiForecastUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                displayForecast(data);
             });
         } else {
             alert("Error: " + response.statusText);
@@ -37,7 +54,7 @@ var displayTitle = function (weatherData, cityName) {
 
     var cityTitleEL = document.createElement("h1");
     cityTitleEL.textContent = cityName + " " + today;
-    cityTitleEL.classList = "ml-3 mt-4 col-12";
+    cityTitleEL.classList = "ml-3 text-capitalize mt-4 col-12";
 
     var iconEl = document.createElement("img");
     iconEl.setAttribute("src", iconUrl);
@@ -112,21 +129,7 @@ var getTodaysUV = function (lat, lon, detailsEl) {
             });
         } else {
             alert("Error: " + response.statusText);
-        }
-    });
-}
-
-var getForecast = function (cityName) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
-
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                displayForecast(data);
-            });
-        } else {
-            alert("Error: " + response.statusText);
-        }
+        }z
     });
 }
 
@@ -177,9 +180,14 @@ var clearElement = function (element) {
 
 var getInfo = function (city) {
     getTodaysWeather(city);
-    getForecast(city);
 }
 
+var cityFormHandler = function(event) {
+    event.preventDefault();
+    var cityName = document.querySelector("#city-search-name").value;
+    document.querySelector("#city-search-name").value = "";
 
+    getInfo(cityName);
+}
 
-getInfo("Atlanta");
+formEl.addEventListener("submit", cityFormHandler);

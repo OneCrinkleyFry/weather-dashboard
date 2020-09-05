@@ -10,10 +10,13 @@ var getTodaysWeather = function (cityName) {
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                searchedCities.push(cityName);
-                localStorage.setItem("cities", JSON.stringify(searchedCities));
-                
-                displayCities();
+                if (!searchedCities.includes(cityName)) {
+
+                    searchedCities.push(cityName);
+                    localStorage.setItem("cities", JSON.stringify(searchedCities));
+
+                    displayCities();
+                }
                 displayTodaysWeather(data, cityName);
             }).then(getForecast(cityName));
         } else {
@@ -137,9 +140,8 @@ var getTodaysUV = function (lat, lon, detailsEl) {
 
 var displayForecast = function (forecast) {
     var forecastArr = forecast.list.splice(0, 5);
-    console.log(forecastArr);
-
     var forecastCardsEl = document.querySelector("#forecast-cards");
+
     clearElement(forecastCardsEl);
 
     for (var i = 0; i < forecastArr.length; i++) {
@@ -148,8 +150,8 @@ var displayForecast = function (forecast) {
         var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
 
         var cardEl = document.createElement('div');
-        cardEl.classList = "badge badge-primary col-xs-12 col-sm-5 col-lg-3" + 
-        " col-xl-auto text-center text-md-left font-weight-light forecast-card";
+        cardEl.classList = "badge badge-primary col-xs-12 col-sm-5 col-lg-3" +
+            " col-xl-auto text-center text-md-left font-weight-light forecast-card";
 
         var dateEl = document.createElement("h4");
         dateEl.textContent = moment().add(i + 1, 'days').format("M/D/YYYY");
@@ -184,16 +186,16 @@ var getInfo = function (city) {
     getTodaysWeather(city);
 }
 
-var cityFormHandler = function(event) {
+var cityFormHandler = function (event) {
     event.preventDefault();
-    var cityName = document.querySelector("#city-search-name").value;
+    var cityName = document.querySelector("#city-search-name").value.toLowerCase();
     document.querySelector("#city-search-name").value = "";
 
     getInfo(cityName);
 }
 
-var displayCities = function() {
-    if (searchedCities){
+var displayCities = function () {
+    if (searchedCities) {
         clearElement(cityListEl);
         for (let i = 0; i < searchedCities.length; i++) {
 
@@ -201,11 +203,13 @@ var displayCities = function() {
             listItemEl.textContent = searchedCities[i];
             listItemEl.classList = "list-group-item text-capitalize";
 
-
             cityListEl.prepend(listItemEl);
         }
     }
 }
+
+
+//cityListEl.addEventListener("click",)
 
 formEl.addEventListener("submit", cityFormHandler);
 

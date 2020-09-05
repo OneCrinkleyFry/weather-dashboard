@@ -1,5 +1,6 @@
 var apiKey = "eb45e13bc37e0b171df80c35b694b693";
-var searchedCitys = [];
+var searchedCitys = JSON.parse(localStorage.getItem("Cities")) || [];
+var formEl = document.querySelector("form-group");
 var cityCardEl = document.querySelector("#city-card");
 
 var getTodaysWeather = function (cityName) {
@@ -142,17 +143,27 @@ var displayForecast = function (forecast) {
         var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
 
         var cardEl = document.createElement('div');
-        cardEl.classList = "badge badge-primary mx-4";
+        cardEl.classList = "badge badge-primary col-xs-12 col-sm-5 col-lg-3" + 
+        " col-xl-auto text-center text-md-left font-weight-light forecast-card";
 
-        var dateEl = document.createElement("h2");
-        dateEl.textContent = moment().add(i + 1, 'days').format("(M/D/YYYY)");
+        var dateEl = document.createElement("h4");
+        dateEl.textContent = moment().add(i + 1, 'days').format("M/D/YYYY");
+        dateEl.classList = "forecast-heading";
         cardEl.appendChild(dateEl);
 
         var iconEl = document.createElement("img");
         iconEl.setAttribute("src", iconUrl);
         cardEl.appendChild(iconEl);
 
+        var temperatureEl = document.createElement("p");
+        temperatureEl.textContent = `Temp: ${forecastArr[i].main.temp} °F`;
+        temperatureEl.classList = "card-detail";
+        cardEl.appendChild(temperatureEl);
 
+        var humidityEl = document.createElement("p");
+        humidityEl.textContent = `Humidity: ${forecastArr[i].main.humidity}%`;
+        humidityEl.classList = "card-detail";
+        cardEl.appendChild(humidityEl);
 
         forecastCardsEl.appendChild(cardEl);
     }
@@ -168,5 +179,7 @@ var getInfo = function (city) {
     getTodaysWeather(city);
     getForecast(city);
 }
+
+
 
 getInfo("Atlanta");

@@ -43,8 +43,21 @@
 .badge-danger {
     background-color: #D90011;
 }
-
 .badge-doomed {
     color: #fff;
     background-color: #6C49CB;
+}
+
+.forecast-card {
+    padding-right: 40px;
+    margin-bottom: 30px;
+    margin-right: 15px;
+}
+
+.forecast-heading {
+    padding-top: 5px;
+}
+
+.card-detail {
+    font-size: 16px;
 }

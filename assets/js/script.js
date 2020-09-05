@@ -182,10 +182,6 @@ var clearElement = function (element) {
     }
 }
 
-// var getInfo = function (city) {
-//     getTodaysWeather(city);
-// }
-
 var cityFormHandler = function (event) {
     event.preventDefault();
     var cityName = document.querySelector("#city-search-name").value.toLowerCase();
@@ -209,7 +205,7 @@ var displayCities = function () {
     }
 }
 
-var cityListHandler = function(event) {
+var cityListHandler = function (event) {
     var cityName = event.target.getAttribute("data-name");
 
     getTodaysWeather(cityName);

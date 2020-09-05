@@ -2,6 +2,7 @@ var apiKey = "eb45e13bc37e0b171df80c35b694b693";
 var searchedCities = JSON.parse(localStorage.getItem("cities")) || [];
 var formEl = document.querySelector(".form-group");
 var cityCardEl = document.querySelector("#city-card");
+var cityListEl = document.querySelector("#city-list");
 
 var getTodaysWeather = function (cityName) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
@@ -11,7 +12,8 @@ var getTodaysWeather = function (cityName) {
             response.json().then(function (data) {
                 searchedCities.push(cityName);
                 localStorage.setItem("cities", JSON.stringify(searchedCities));
-
+                
+                displayCities();
                 displayTodaysWeather(data, cityName);
             }).then(getForecast(cityName));
         } else {
@@ -129,7 +131,7 @@ var getTodaysUV = function (lat, lon, detailsEl) {
             });
         } else {
             alert("Error: " + response.statusText);
-        }z
+        }
     });
 }
 
@@ -190,4 +192,21 @@ var cityFormHandler = function(event) {
     getInfo(cityName);
 }
 
+var displayCities = function() {
+    if (searchedCities){
+        clearElement(cityListEl);
+        for (let i = 0; i < searchedCities.length; i++) {
+
+            var listItemEl = document.createElement("li");
+            listItemEl.textContent = searchedCities[i];
+            listItemEl.classList = "list-group-item text-capitalize";
+
+
+            cityListEl.prepend(listItemEl);
+        }
+    }
+}
+
 formEl.addEventListener("submit", cityFormHandler);
+
+displayCities();

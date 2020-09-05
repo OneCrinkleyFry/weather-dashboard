@@ -61,3 +61,21 @@
 .card-detail {
     font-size: 16px;
 }
+
+.list-group-item:hover {
+    color: #43464b;
+    font-weight: bold;
+    border-width: 3px;
+    border-style: outset;
+    border-radius: 5px;
+    transition: all 5 ease-in-out;
+}
+
+#search-btn:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: mediumblue;
+    font-weight: bold;
+    transition: all 1 ease-in-out;
+    ;
+}

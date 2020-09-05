@@ -182,16 +182,16 @@ var clearElement = function (element) {
     }
 }
 
-var getInfo = function (city) {
-    getTodaysWeather(city);
-}
+// var getInfo = function (city) {
+//     getTodaysWeather(city);
+// }
 
 var cityFormHandler = function (event) {
     event.preventDefault();
     var cityName = document.querySelector("#city-search-name").value.toLowerCase();
     document.querySelector("#city-search-name").value = "";
 
-    getInfo(cityName);
+    getTodaysWeather(cityName);
 }
 
 var displayCities = function () {
@@ -202,15 +202,22 @@ var displayCities = function () {
             var listItemEl = document.createElement("li");
             listItemEl.textContent = searchedCities[i];
             listItemEl.classList = "list-group-item text-capitalize";
+            listItemEl.setAttribute("data-name", searchedCities[i]);
 
             cityListEl.prepend(listItemEl);
         }
     }
 }
 
+var cityListHandler = function(event) {
+    var cityName = event.target.getAttribute("data-name");
 
-//cityListEl.addEventListener("click",)
+    getTodaysWeather(cityName);
+}
+
 
 formEl.addEventListener("submit", cityFormHandler);
+
+cityListEl.addEventListener("click", cityListHandler);
 
 displayCities();

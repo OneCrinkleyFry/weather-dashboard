@@ -1,0 +1,77 @@
+#city-search-name {
+    max-width: 65%;
+}
+
+#search-btn {
+    min-width: 38px;
+}
+
+#city-list {
+    margin-left: 15px;
+    min-width: 80%;
+}
+
+#city-five-day {
+    height: 200px;
+}
+
+#city-details {
+    height: 100%;
+}
+
+.city-detail {
+    font-size: 20px;
+}
+
+.badge-success {
+    background-color: #299501;
+}
+
+.badge-warning {
+    background-color: #F7E401;
+}
+
+.badge-caution {
+    color: #212529;
+    background-color: #F95901;
+}
+
+.badge-danger {
+    background-color: #D90011;
+}
+.badge-doomed {
+    color: #fff;
+    background-color: #6C49CB;
+}
+
+.forecast-card {
+    padding-right: 40px;
+    margin-bottom: 30px;
+    margin-right: 15px;
+}
+
+.forecast-heading {
+    padding-top: 5px;
+}
+
+.card-detail {
+    font-size: 16px;
+}
+
+.list-group-item:hover {
+    color: #43464b;
+    font-weight: bold;
+    border-width: 3px;
+    border-style: outset;
+    border-radius: 5px;
+    transition: all 5 ease-in-out;
+}
+
+#search-btn:hover {
+    border-style: solid;
+    border-width: 2px;
+    border-color: mediumblue;
+    font-weight: bold;
+    transition: all 1 ease-in-out;
+    ;
+}

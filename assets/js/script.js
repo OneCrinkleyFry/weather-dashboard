@@ -9,7 +9,7 @@ var cityListEl = document.querySelector("#city-list");
 var getTodaysWeather = function (cityName) {
 
     //creates an endpoint url using that city name
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+    var apiUrl = "//api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
 
     //fetches data from that endpoint
     fetch(apiUrl).then(function (response) {
@@ -43,7 +43,7 @@ var getTodaysWeather = function (cityName) {
 var getForecast = function (cityName) {
 
     //creates an endpoint
-    var apiForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+    var apiForecastUrl = "//api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
 
     //fetches that endpoint
     fetch(apiForecastUrl).then(function (response) {
@@ -82,7 +82,7 @@ var displayTitle = function (weatherData, cityName) {
     //determines which icon to use
     var icon = weatherData.weather[0].icon;
     //pulls that icon from it's source
-    var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+    var iconUrl = "//openweathermap.org/img/w/" + icon + ".png";
 
     //creates an h1 element and applies the CityName and date.
     var cityTitleEL = document.createElement("h1");
@@ -170,7 +170,7 @@ var displayUV = function (uv, detailsEl) {
 var getTodaysUV = function (lat, lon, detailsEl) {
 
     //creates an endpoint
-    var apiUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
+    var apiUrl = "//api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
     
     //fetches the data at that endpoint
     fetch(apiUrl).then(function (response) {
@@ -200,7 +200,7 @@ var displayForecast = function (forecast) {
 
         //gets the appropriate weather icon
         var icon = forecastArr[i].weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+        var iconUrl = "//openweathermap.org/img/w/" + icon + ".png";
 
         //creates a div parent
         var cardEl = document.createElement('div');
